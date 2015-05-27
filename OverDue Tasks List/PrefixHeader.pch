@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  OverDue Tasks List
+//
+//  Created by Albert Saucedo on 5/26/15.
+//  Copyright (c) 2015 Albert Saucedo. All rights reserved.
+//
+
+#ifndef OverDue_Tasks_List_PrefixHeader_pch
+#define OverDue_Tasks_List_PrefixHeader_pch
+
+
+#define TASK_TITLE @"Task Title"
+#define TASK_DESCRIPTION @"Task Description"
+#define TASK_DATE @"Task Date"
+#define TASK_COMPLETION @"Task Completion"
+
+#define TASKS @"Task Array"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

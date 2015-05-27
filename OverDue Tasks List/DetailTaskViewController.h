@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DetailTaskViewController.h
 //  OverDue Tasks List
 //
 //  Created by Albert Saucedo on 5/25/15.
@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-- (IBAction)addTask:(UIBarButtonItem *)sender;
-
+@interface DetailTaskViewController : UIViewController
 
 @end
-

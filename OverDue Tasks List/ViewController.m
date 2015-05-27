@@ -7,6 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "AddTaskViewController.h"
+#import "EditTaskViewController.h"
+#import "DetailTaskViewController.h"
+
+#define CELL_ID @"taskCellID"
 
 @interface ViewController ()
 
@@ -24,4 +29,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.destinationViewController isKindOfClass:[AddTaskViewController class]]) {
+        //[self performSegueWithIdentifier:@"toAddTaskVC" sender:self];
+    } else if ([segue.destinationViewController isKindOfClass:[DetailTaskViewController class]]){
+        //[self performSegueWithIdentifier:@"toDetailTaskVC" sender:self];
+    }
+}
+
+- (IBAction)addTask:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"toAddTaskVC" sender:self];
+}
 @end
