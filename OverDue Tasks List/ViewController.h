@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 - (IBAction)addTask:(UIBarButtonItem *)sender;
 
+@property (strong, nonatomic) NSMutableArray *taskObjects;
 
 @end
 

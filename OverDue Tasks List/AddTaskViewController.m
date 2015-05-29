@@ -24,6 +24,9 @@
 }
 
 - (IBAction)addTaskButtonPressed:(UIButton *)sender {
+    Task *task = [Task new];
+    task = [self returnATask:task];
+    [self.delegate didAddTask:task];
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
