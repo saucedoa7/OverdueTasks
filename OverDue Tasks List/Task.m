@@ -7,6 +7,7 @@
 //
 
 #import "Task.h"
+#import "ViewController.h"
 
 @implementation Task
 
@@ -25,6 +26,19 @@
     self.date = data[TASK_DATE];
     self.completion = [data[TASK_COMPLETION] boolValue];
 
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    ViewController *vc = [ViewController new];
+    [aCoder encodeObject:vc.taskObjects forKey:TASKS];
+}
+
+-(Task *)initWithCoder:(NSCoder *)aDecoder{
+    ViewController *vc = [ViewController new];
+    if (self = [super init]) {
+        vc.taskObjects = [aDecoder decodeObjectForKey:TASKS];
+    }
     return self;
 }
 @end

@@ -23,6 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
+    NSArray *taskAsPropList = [[NSUserDefaults standardUserDefaults] arrayForKey:TASKS];
+
+    for (NSDictionary * dic in taskAsPropList) {
+        Task *task = [self taskObjectForDic:dic];
+        [self.taskObjects addObject:task];
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    animated = YES;
+
+    [self loadData];
+
+    NSLog(@"Loaded Data %@", self.taskObjects);
 }
 
 -(void)didCancel{
@@ -31,24 +46,28 @@
 
 }
 
--(void)didAddTask:(Task *)task{
+-(void)didAddTask:(Task *)task{ //1
     if (!self.taskObjects) {
         self.taskObjects = [NSMutableArray new];
     }
 
-    [self taskObjectAsAPropertyList:task];
-
+    //[self taskObjectAsAPropertyList:task]; //2
     NSLog(@"Dat Dictionary %@", task);
 
     [self.taskObjects addObject:task];
     NSLog(@"taskObjects %@", self.taskObjects);
 
-    //[self saveData];
+    [self saveData]; //3
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(NSDictionary *)taskObjectAsAPropertyList:(Task *)taskObject{
+-(Task *)taskObjectForDic:(NSDictionary *)dic{
+    Task *task = [[Task alloc] initWithData:dic];
+    return task;
+}
+
+-(NSDictionary *)taskObjectAsAPropertyList:(Task *)taskObject{ //2
 
     NSDictionary *dictionary = @{TASK_TITLE : taskObject.title,
                                  TASK_DESCRIPTION : taskObject.desc,
@@ -74,21 +93,25 @@
     [self performSegueWithIdentifier:@"toAddTaskVC" sender:self];
 }
 
--(void)saveData{
+
+
+-(void)saveData{ //3
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"taskObjects %@", self.taskObjects);
 
-    NSData *data = [NSData new];
-
-    data = [NSKeyedArchiver archivedDataWithRootObject:self.taskObjects];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.taskObjects];
     [userDefaults setObject:data forKey:TASKS];
+
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:TASKS];
 
     [userDefaults synchronize];
 }
 
 -(void)loadData{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *arrayData = [userDefaults objectForKey:TASKS];
+    NSMutableArray *retrievedArray = [NSKeyedUnarchiver unarchiveObjectWithData:arrayData];
 
-    self.taskObjects = [userDefaults objectForKey:TASKS];
+    self.taskObjects = [[NSMutableArray alloc] initWithArray:retrievedArray];
 }
 @end

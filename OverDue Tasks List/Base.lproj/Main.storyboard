@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Fk0-s1-xIh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Fk0-s1-xIh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -279,19 +280,19 @@
                                 <exclude reference="p0L-1c-Jwu"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="R2n-ah-cqW"/>
                                 <exclude reference="1SB-Fo-28O"/>
                                 <exclude reference="DBt-KP-Xr6"/>
                                 <exclude reference="Mom-LI-XnP"/>
                                 <exclude reference="iNb-Hc-Zfx"/>
+                                <exclude reference="OX9-ie-T4i"/>
+                                <exclude reference="bde-wK-kxl"/>
                                 <exclude reference="ZLa-MP-3Hx"/>
                                 <exclude reference="iKL-1R-aE5"/>
                                 <exclude reference="6NJ-aX-ah2"/>
                                 <exclude reference="UL1-yf-EbX"/>
                                 <exclude reference="jz7-a3-pD6"/>
                                 <exclude reference="qZT-Pu-CgV"/>
-                                <exclude reference="OX9-ie-T4i"/>
-                                <exclude reference="bde-wK-kxl"/>
-                                <exclude reference="R2n-ah-cqW"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -303,19 +304,19 @@
                                 <include reference="p0L-1c-Jwu"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="R2n-ah-cqW"/>
                                 <include reference="1SB-Fo-28O"/>
                                 <include reference="DBt-KP-Xr6"/>
                                 <include reference="Mom-LI-XnP"/>
                                 <include reference="iNb-Hc-Zfx"/>
+                                <include reference="OX9-ie-T4i"/>
+                                <include reference="bde-wK-kxl"/>
                                 <include reference="ZLa-MP-3Hx"/>
                                 <include reference="iKL-1R-aE5"/>
                                 <include reference="6NJ-aX-ah2"/>
                                 <include reference="UL1-yf-EbX"/>
                                 <include reference="jz7-a3-pD6"/>
                                 <include reference="qZT-Pu-CgV"/>
-                                <include reference="OX9-ie-T4i"/>
-                                <include reference="bde-wK-kxl"/>
-                                <include reference="R2n-ah-cqW"/>
                             </mask>
                         </variation>
                     </view>
