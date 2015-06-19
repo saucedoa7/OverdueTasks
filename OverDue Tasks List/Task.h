@@ -12,7 +12,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *desc;
 @property (strong, nonatomic) NSDate *date;
-@property (nonatomic, assign) BOOL completion;
+@property (nonatomic, assign) BOOL isCompleted;
 
 -(id)initWithData:(NSDictionary *)data;
 

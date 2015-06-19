@@ -24,18 +24,19 @@
 }
 
 - (IBAction)addTaskButtonPressed:(UIButton *)sender {
-    Task *task = [Task new];
-    task = [self returnATask:task];
-    [self.delegate didAddTask:task];
+    [self.delegate didAddTask:[self returnATask]];
 }
 
 - (IBAction)cancelButtonPressed:(UIButton *)sender {
+    [self.delegate didCancel];
 }
 
 
 #pragma mark Helpers
 
--(Task *)returnATask:(Task *)task{
+-(Task *)returnATask {
+
+    Task *task = [Task new];
 
     /*
      NSDate *date = self.date.date;
@@ -48,7 +49,7 @@
     task.desc = self.txtTaskDesc.text;
     task.date = self.date.date;
 
-    task.completion = NO;
+    task.isCompleted = NO;
 
     return task;
 }

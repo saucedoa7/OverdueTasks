@@ -14,7 +14,7 @@
 
 #define CELL_ID @"taskCellID"
 
-@interface ViewController () <AddTaskDelegate>
+@interface ViewController () <AddTaskDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -23,42 +23,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
-    NSArray *taskAsPropList = [[NSUserDefaults standardUserDefaults] arrayForKey:TASKS];
-
-    for (NSDictionary * dic in taskAsPropList) {
-        Task *task = [self taskObjectForDic:dic];
-        [self.taskObjects addObject:task];
-    }
+    [self loadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     animated = YES;
-
-    [self loadData];
-
     NSLog(@"Loaded Data %@", self.taskObjects);
 }
 
--(void)didCancel{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCellID" forIndexPath:indexPath];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    Task *task = [self.taskObjects objectAtIndex:indexPath.row];
 
+    NSLog(@"Current Task Being Loaded %@", task);
+
+    cell.textLabel.text = task.title;
+    //cell.detailTextLabel.text = task.desc;
+
+    return cell;
 }
 
--(void)didAddTask:(Task *)task{ //1
-    if (!self.taskObjects) {
-        self.taskObjects = [NSMutableArray new];
-    }
 
-    //[self taskObjectAsAPropertyList:task]; //2
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.taskObjects.count;
+}
+
+-(void)didAddTask:(Task *)task{ //A
+    if (!self.taskObjects) self.taskObjects = [NSMutableArray new];
     NSLog(@"Dat Dictionary %@", task);
 
     [self.taskObjects addObject:task];
     NSLog(@"taskObjects %@", self.taskObjects);
 
-    [self saveData]; //3
+    NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASKS] mutableCopy];
 
+    if (!tasksAsPropertyLists) tasksAsPropertyLists = [NSMutableArray new];
+
+    [tasksAsPropertyLists addObject: [self taskObjectAsAPropertyList:task]];
+    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASKS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    NSLog(@"taskObjects %@", self.taskObjects);
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    [self.tableView reloadData];
+}
+
+-(void)didCancel{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -67,12 +80,12 @@
     return task;
 }
 
--(NSDictionary *)taskObjectAsAPropertyList:(Task *)taskObject{ //2
+-(NSDictionary *)taskObjectAsAPropertyList:(Task *)taskObject{ //B
 
     NSDictionary *dictionary = @{TASK_TITLE : taskObject.title,
                                  TASK_DESCRIPTION : taskObject.desc,
                                  TASK_DATE : taskObject.date,
-                                 TASK_COMPLETION : [NSNumber numberWithBool: taskObject.completion],
+                                 TASK_COMPLETION : [NSNumber numberWithBool: taskObject.isCompleted],
                                  };
     return dictionary;
 }
@@ -84,6 +97,7 @@
 
         AddTaskViewController *addTaskVC = [segue destinationViewController];
         addTaskVC.delegate = self;
+
     } else if ([segue.destinationViewController isKindOfClass:[DetailTaskViewController class]]){
         //[self performSegueWithIdentifier:@"toDetailTaskVC" sender:self];
     }
@@ -93,25 +107,32 @@
     [self performSegueWithIdentifier:@"toAddTaskVC" sender:self];
 }
 
+-(NSMutableArray *)taskObjects{
+    if (!_taskObjects) _taskObjects = [NSMutableArray new];
+    return _taskObjects;
+}
 
+-(void)saveData{ //C
 
--(void)saveData{ //3
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    Task *task = [Task new];
+    NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASKS] mutableCopy];
+
+    if (!tasksAsPropertyLists) tasksAsPropertyLists = [NSMutableArray new];
+
+    [tasksAsPropertyLists addObject: [self taskObjectAsAPropertyList:task]];
+    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASKS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     NSLog(@"taskObjects %@", self.taskObjects);
-
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.taskObjects];
-    [userDefaults setObject:data forKey:TASKS];
-
-    [[NSUserDefaults standardUserDefaults] setObject:data forKey:TASKS];
-
-    [userDefaults synchronize];
 }
 
 -(void)loadData{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSData *arrayData = [userDefaults objectForKey:TASKS];
-    NSMutableArray *retrievedArray = [NSKeyedUnarchiver unarchiveObjectWithData:arrayData];
+    NSArray *tasksAsPropertyLists = [[NSUserDefaults standardUserDefaults] arrayForKey:TASKS];
 
-    self.taskObjects = [[NSMutableArray alloc] initWithArray:retrievedArray];
+    for (NSDictionary * dic in tasksAsPropertyLists) {
+        Task *task = [self taskObjectForDic:dic];
+        [self.taskObjects addObject:task];
+    }
+
 }
 @end
