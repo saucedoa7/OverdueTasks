@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Task TableView Cell">
+      <FileRef
+         location = "group:../TaskTableViewCell.h">
+      </FileRef>
+      <FileRef
+         location = "group:../TaskTableViewCell.m">
+      </FileRef>
+   </Group>
    <FileRef
       location = "self:OverDue Tasks List.xcodeproj">
    </FileRef>
