@@ -11,6 +11,7 @@
 #import "EditTaskViewController.h"
 #import "DetailTaskViewController.h"
 #import "Task.h"
+#import "TaskTableViewCell.h"
 
 #define CELL_ID @"taskCellID"
 
@@ -32,16 +33,85 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCellID" forIndexPath:indexPath];
 
+    TaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCellID" forIndexPath:indexPath];
     Task *task = [self.taskObjects objectAtIndex:indexPath.row];
 
     NSLog(@"Current Task Being Loaded %@", task);
+    NSLog(@"Current Task Date Being Loaded %@", task.date);
 
-    cell.textLabel.text = task.title;
-    //cell.detailTextLabel.text = task.desc;
+    NSDate *date = task.date;
+    NSDate *currentDate = [NSDate date];
+
+    BOOL isOverDue = [self isTaskDateGreaterThanTodaysDate:date and:currentDate];
+
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"MM-dd-yy"];
+    NSString *dateFormat = [formatter stringFromDate:date];
+
+    cell.lblTitle.text = task.title;
+    cell.lblDetails.text = task.desc;
+    cell.lblDate.text = dateFormat;
+
+    if (isOverDue) {
+        cell.backgroundColor = [UIColor redColor];
+    } else {
+        cell.backgroundColor = [UIColor yellowColor];
+    }
+
+    if (task.isCompleted) {
+        cell.backgroundColor = [UIColor greenColor];
+    }
 
     return cell;
+}
+
+-(BOOL)isTaskDateGreaterThanTodaysDate:(NSDate *)taskDate and:(NSDate *)todaysDate{
+
+    NSTimeInterval taskDateSec = [taskDate timeIntervalSince1970]/100000;
+    NSTimeInterval todaysDateSec = [todaysDate timeIntervalSince1970]/100000;
+
+    NSLog(@"Task Date %.4f and Todays Date %.4f", taskDateSec, todaysDateSec);
+
+    if (taskDateSec < todaysDateSec) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    //1
+    NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASKS] mutableCopy];
+    NSLog(@"Tapped array %@", tasksAsPropertyLists);
+
+    if (!tasksAsPropertyLists) tasksAsPropertyLists = [NSMutableArray new];
+
+    //2
+    Task *task = [self.taskObjects objectAtIndex:indexPath.row];
+    NSLog(@"Tapped Cell %@", task);
+    [self.taskObjects removeObject:task];
+
+    //3
+    task.isCompleted = YES;
+
+    //4
+    [self taskObjectAsAPropertyList:task];
+
+    //5
+    [self.taskObjects insertObject:task atIndex:indexPath.row];
+
+    //6
+    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASKS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    //7
+    [self.tableView reloadData];
+
+    NSLog(@"Tapped array %@", tasksAsPropertyLists);
+    NSLog(@"Loaded Data %@", self.taskObjects);
+
 }
 
 
@@ -133,6 +203,6 @@
         Task *task = [self taskObjectForDic:dic];
         [self.taskObjects addObject:task];
     }
-
+    
 }
 @end

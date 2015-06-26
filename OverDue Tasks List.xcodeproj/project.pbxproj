@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5063C99A1B3CCD9700F5497E /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5063C9991B3CCD9700F5497E /* TaskTableViewCell.m */; };
 		50D746881B13E3D000C402BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D746871B13E3D000C402BB /* main.m */; };
 		50D7468B1B13E3D000C402BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7468A1B13E3D000C402BB /* AppDelegate.m */; };
 		50D7468E1B13E3D000C402BB /* OverDue_Tasks_List.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 50D7468C1B13E3D000C402BB /* OverDue_Tasks_List.xcdatamodeld */; };
@@ -32,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5063C9981B3CCD9700F5497E /* TaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
+		5063C9991B3CCD9700F5497E /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
 		50D746821B13E3D000C402BB /* OverDue Tasks List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OverDue Tasks List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D746861B13E3D000C402BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50D746871B13E3D000C402BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 		50FD8B601B1547990007C6E9 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				5063C9981B3CCD9700F5497E /* TaskTableViewCell.h */,
+				5063C9991B3CCD9700F5497E /* TaskTableViewCell.m */,
 				50FD8B5D1B1547910007C6E9 /* Task.h */,
 				50FD8B5E1B1547910007C6E9 /* Task.m */,
 			);
@@ -287,6 +292,7 @@
 			files = (
 				50D746B01B13E44100C402BB /* AddTaskViewController.m in Sources */,
 				50D7468E1B13E3D000C402BB /* OverDue_Tasks_List.xcdatamodeld in Sources */,
+				5063C99A1B3CCD9700F5497E /* TaskTableViewCell.m in Sources */,
 				50D746B31B13E45600C402BB /* DetailTaskViewController.m in Sources */,
 				50D7468B1B13E3D000C402BB /* AppDelegate.m in Sources */,
 				50FD8B5F1B1547910007C6E9 /* Task.m in Sources */,
