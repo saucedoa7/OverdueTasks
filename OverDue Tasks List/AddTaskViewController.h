@@ -20,7 +20,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *txtTaskName;
 @property (strong, nonatomic) IBOutlet UITextView *txtTaskDesc;
-@property (strong, nonatomic) IBOutlet UIDatePicker *date;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 
 - (IBAction)addTaskButtonPressed:(UIButton *)sender;

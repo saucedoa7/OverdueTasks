@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Fk0-s1-xIh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Fk0-s1-xIh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -38,15 +38,6 @@
                                                         <rect key="frame" x="8" y="32" width="343" height="22"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNa-Hp-ZnG">
-                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="8" width="315" height="22"/>
-                                                    </variation>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6/26/15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3a-Ep-0ti">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <animations/>
@@ -57,20 +48,29 @@
                                                         <rect key="frame" x="291" y="5" width="60" height="22"/>
                                                     </variation>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNa-Hp-ZnG">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="8" y="8" width="315" height="22"/>
+                                                    </variation>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="bOI-3X-upY"/>
-                                                    <exclude reference="wNa-Hp-ZnG"/>
                                                     <exclude reference="C3a-Ep-0ti"/>
+                                                    <exclude reference="wNa-Hp-ZnG"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="bOI-3X-upY"/>
-                                                    <include reference="wNa-Hp-ZnG"/>
                                                     <include reference="C3a-Ep-0ti"/>
+                                                    <include reference="wNa-Hp-ZnG"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -108,7 +108,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Reorder" id="19Y-6S-Y01"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qwm-Fg-rFw">
                             <connections>
-                                <action selector="addTask:" destination="vXZ-lx-hvc" id="hUK-td-7hw"/>
+                                <action selector="addTask:" destination="vXZ-lx-hvc" id="40t-Us-wRY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -389,7 +389,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="date" destination="VyV-Jo-ejf" id="xM8-gP-ayF"/>
+                        <outlet property="datePicker" destination="VyV-Jo-ejf" id="HoP-tU-wZR"/>
                         <outlet property="txtTaskDesc" destination="fuB-9b-RIl" id="sYS-4I-AcV"/>
                         <outlet property="txtTaskName" destination="rIR-cy-uzO" id="Qoe-G3-jXh"/>
                     </connections>

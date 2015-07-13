@@ -38,16 +38,9 @@
 
     Task *task = [Task new];
 
-    /*
-     NSDate *date = self.date.date;
-     NSDateFormatter *formatter = [NSDateFormatter new];
-     [formatter setDateFormat:@"MM-dd-yy hh:mm:ss"];
-     NSString *dateFormat = [formatter stringFromDate:date];
-     */
-
     task.title = self.txtTaskName.text;
     task.desc = self.txtTaskDesc.text;
-    task.date = self.date.date;
+    task.date = self.datePicker.date;
 
     task.isCompleted = NO;
 
