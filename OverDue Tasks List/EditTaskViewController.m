@@ -11,7 +11,7 @@
 #import "EditTaskViewController.h"
 #import "DetailTaskViewController.h"
 
-@interface EditTaskViewController ()
+@interface EditTaskViewController ()<UITextFieldDelegate, UITextViewDelegate>
 
 @end
 
@@ -19,22 +19,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.txtTitle.text = self.task.title;
+    self.txtDesc.text = self.task.desc;
+    self.datePicker.date = self.task.date;
+    
+    self.txtTitle.delegate = self;
+    self.txtDesc.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)saveUpdatedTask:(UIBarButtonItem *)sender {
+    [self updateTask];
+    //D
+    [self.editTaskVCdelegate didUpdateTask];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//C
+-(void)updateTask{
+    self.task.title = self.txtTitle.text;
+    self.task.desc = self.txtDesc.text;
+    self.task.date = self.datePicker.date;
 }
-*/
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [self.txtTitle resignFirstResponder];
+    [self.txtDesc resignFirstResponder];
+    
+    return YES;
+}
 
 @end

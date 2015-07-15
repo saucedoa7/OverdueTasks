@@ -7,7 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditTaskViewController.h"
+#import "Task.h"
+
+@protocol DetailsTaskVCDelegate <NSObject>
+
+-(void)updateTask;
+
+@end
 
 @interface DetailTaskViewController : UIViewController
+
+@property (weak, nonatomic) id <DetailsTaskVCDelegate> DetailsTaskdelegate;
+
+@property (strong, nonatomic) Task *task;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblDetails;
+@property (weak, nonatomic) IBOutlet UILabel *lblDate;
 
 @end

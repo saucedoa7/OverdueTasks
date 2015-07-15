@@ -15,7 +15,7 @@
 
 #define CELL_ID @"taskCellID"
 
-@interface ViewController () <AddTaskDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <AddTaskDelegate, UITableViewDelegate, UITableViewDataSource, DetailsTaskVCDelegate>
 
 @end
 
@@ -34,18 +34,19 @@
 -(void)viewWillAppear:(BOOL)animated{
     animated = YES;
     NSLog(@"Loaded Data %@", self.taskObjects);
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     TaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID forIndexPath:indexPath];
     Task *task = self.taskObjects [indexPath.row];
-
-
+    
+    
     if (task.isCompleted) {
         cell.backgroundColor = [UIColor greenColor];
     }
-
+    
     NSLog(@"Current Task Being Loaded %@", task);
     
     NSDate *date = task.date;
@@ -87,13 +88,36 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    Task *task = self.taskObjects [indexPath.row];
-    
-    [self updateCompletionOfTask:task forIndex:indexPath];
-
-    
+//    Task *task = self.taskObjects [indexPath.row];
+//    [self updateCompletionOfTask:task forIndex:indexPath];
 }
+
+- (IBAction)reorderTasks:(UIBarButtonItem *)sender {
+    if (self.tableView.editing == YES) {
+        [self.tableView setEditing:NO animated:YES];
+    } else {
+        [self.tableView setEditing:YES animated:YES];
+    }
+    
+    [self saveData];
+}
+
+#pragma mark Move row
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    
+    
+    Task *taskObject = self.taskObjects[sourceIndexPath.row];
+    
+    [self.taskObjects removeObjectAtIndex:sourceIndexPath.row];
+    [self.taskObjects insertObject:taskObject atIndex:destinationIndexPath.row];
+}
+
+#pragma mark Delete Task row
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
@@ -116,6 +140,12 @@
     }
 }
 
+#pragma mark Send data to DetailsVC 1
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"toDetailTaskVC" sender:indexPath];
+}
+
 -(void)updateCompletionOfTask:(Task *)task forIndex:(NSIndexPath *)indexPath{
     
     
@@ -127,7 +157,7 @@
     
     //2
     [tasksAsPropertyLists removeObjectAtIndex:indexPath.row];
-
+    
     for (Task *task in self.taskObjects) {
         [tasksAsPropertyLists addObject:[self taskObjectAsAPropertyList:task]];
     }
@@ -154,7 +184,7 @@
 
 -(void)didAddTask:(Task *)task{ //A
     //if (!self.taskObjects) self.taskObjects = [NSMutableArray new];
-
+    
     [self.taskObjects addObject:task];
     
     NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASKS_ARRAY] mutableCopy];
@@ -162,27 +192,30 @@
     if (!tasksAsPropertyLists) tasksAsPropertyLists = [NSMutableArray new];
     
     [tasksAsPropertyLists addObject: [self taskObjectAsAPropertyList:task]];
-
+    
     NSMutableArray *archiveArray = [NSMutableArray arrayWithCapacity:tasksAsPropertyLists.count];
-
+    
     for (Task *task in tasksAsPropertyLists) {
         NSData *taskEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:task];
         [archiveArray addObject:taskEncodedObject];
     }
-
+    
     [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASKS_ARRAY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.tableView reloadData];
-
-
 }
 
 
 -(void)didCancel{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)updateTask{
+    [self saveData];
+    [self.tableView reloadData];
 }
 
 -(NSDictionary *)taskObjectAsAPropertyList:(Task *)taskObject{ //B
@@ -192,7 +225,7 @@
                                  TASK_DATE : taskObject.date,
                                  TASK_COMPLETION : @(taskObject.isCompleted),
                                  };
-
+    
     return dictionary;
 }
 
@@ -204,8 +237,14 @@
         AddTaskViewController *addTaskVC = [segue destinationViewController];
         addTaskVC.delegate = self;
         
+#pragma mark Send data to DetailsVC 2
+        
     } else if ([segue.destinationViewController isKindOfClass:[DetailTaskViewController class]]){
-        //[self performSegueWithIdentifier:@"toDetailTaskVC" sender:self];
+        DetailTaskViewController *detailsVC = [segue destinationViewController];
+        NSIndexPath *path = sender;
+        
+        Task *taskObject = self.taskObjects[path.row];
+        detailsVC.task = taskObject;
     }
 }
 
@@ -223,21 +262,21 @@
     return task;
 }
 
-/*
+
 -(void)saveData{ //C
     
-    Task *task = [Task new];
-    NSMutableArray *tasksAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASKS_ARRAY] mutableCopy];
+    NSMutableArray *tasksAsPropList = [NSMutableArray new];
     
-    if (!tasksAsPropertyLists) tasksAsPropertyLists = [NSMutableArray new];
+    for (int x = 0; x < [self.taskObjects count]; x ++) {
+        [tasksAsPropList addObject:[self taskObjectAsAPropertyList:self.taskObjects[x]]];
+    }
     
-    [tasksAsPropertyLists addObject: [self taskObjectAsAPropertyList:task]];
-    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropertyLists forKey:TASKS_ARRAY];
+    [[NSUserDefaults standardUserDefaults] setObject:tasksAsPropList forKey:TASKS_ARRAY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"taskObjects %@", self.taskObjects);
 }
-*/
+
 
 -(void)loadData{
     NSArray *tasksAsPropertyLists = [[NSUserDefaults standardUserDefaults] arrayForKey:TASKS_ARRAY];

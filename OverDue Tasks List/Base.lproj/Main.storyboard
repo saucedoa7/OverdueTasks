@@ -15,7 +15,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Edz-lS-b2s">
@@ -23,7 +23,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCellID" rowHeight="63" id="OqF-9g-zP2" customClass="TaskTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="taskCellID" rowHeight="63" id="OqF-9g-zP2" customClass="TaskTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OqF-9g-zP2" id="DaI-ZU-Bfh">
@@ -45,7 +45,7 @@
                                                     <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="291" y="5" width="60" height="22"/>
+                                                        <rect key="frame" x="261" y="5" width="60" height="22"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNa-Hp-ZnG">
@@ -83,7 +83,7 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="tGb-cD-tTQ"/>
@@ -105,13 +105,18 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="GfA-jK-eRQ">
-                        <barButtonItem key="leftBarButtonItem" title="Reorder" id="19Y-6S-Y01"/>
+                        <barButtonItem key="leftBarButtonItem" title="Reorder" id="19Y-6S-Y01">
+                            <connections>
+                                <action selector="reorderTasks:" destination="vXZ-lx-hvc" id="bW1-yb-110"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qwm-Fg-rFw">
                             <connections>
                                 <action selector="addTask:" destination="vXZ-lx-hvc" id="40t-Us-wRY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="Edz-lS-b2s" id="NT3-17-eB9"/>
                         <segue destination="GCz-V9-9Ot" kind="presentation" identifier="toAddTaskVC" id="WSO-B0-abo"/>
@@ -131,63 +136,70 @@
                         <viewControllerLayoutGuide type="bottom" id="9MA-eC-TqP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gfn-7E-uc2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8W-ec-lNP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olb-x9-dzg">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="152" y="109" width="57" height="21"/>
+                                    <rect key="frame" x="16" y="208" width="350" height="114"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olb-x9-dzg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHh-Ef-Xl6">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="152" y="138" width="57" height="21"/>
+                                    <rect key="frame" x="16" y="72" width="105" height="21"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label 3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHh-Ef-Xl6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8W-ec-lNP">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="152" y="167" width="57" height="21"/>
+                                    <rect key="frame" x="16" y="101" width="368" height="43"/>
                                 </variation>
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.85065498737373735" green="0.85065498737373735" blue="0.85065498737373735" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="O8W-ec-lNP"/>
                                 <exclude reference="olb-x9-dzg"/>
                                 <exclude reference="rHh-Ef-Xl6"/>
+                                <exclude reference="O8W-ec-lNP"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="O8W-ec-lNP"/>
                                 <include reference="olb-x9-dzg"/>
                                 <include reference="rHh-Ef-Xl6"/>
+                                <include reference="O8W-ec-lNP"/>
                             </mask>
                         </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="idr-6V-h9P">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="TZc-fJ-YFv"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="TZc-fJ-YFv">
+                            <connections>
+                                <action selector="editBarButtonTAsk:" destination="15r-BJ-ugg" id="fNz-zZ-wpQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="lblDate" destination="rHh-Ef-Xl6" id="MNO-Qw-m01"/>
+                        <outlet property="lblDetails" destination="olb-x9-dzg" id="W58-t5-mhg"/>
+                        <outlet property="lblTitle" destination="O8W-ec-lNP" id="vf4-Qm-TST"/>
                         <segue destination="4KP-8o-yap" kind="show" identifier="toEditTaskVC" id="lbb-tH-ruB"/>
                     </connections>
                 </viewController>
@@ -204,21 +216,72 @@
                         <viewControllerLayoutGuide type="bottom" id="GG7-ul-VOP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Hac-Q3-sx8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bWg-EL-J04">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="104" width="343" height="30"/>
+                                </variation>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7Aj-RL-Wji">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.92477509469696972" green="0.92477509469696972" blue="0.92477509469696972" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="142" width="343" height="123"/>
+                                </variation>
+                            </textView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="AZr-H8-qRq">
+                                <rect key="frame" x="-160" y="-81" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="458590670.42403799">
+                                    <!--2015-07-14 18:17:50 +0000-->
+                                </date>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="273" width="375" height="162"/>
+                                </variation>
+                            </datePicker>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="bWg-EL-J04"/>
+                                <exclude reference="7Aj-RL-Wji"/>
+                                <exclude reference="AZr-H8-qRq"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="bWg-EL-J04"/>
+                                <include reference="7Aj-RL-Wji"/>
+                                <include reference="AZr-H8-qRq"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems>
                         <barButtonItem title="Item" id="2Bd-JQ-b9c"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Title" id="vUa-Sl-hVL">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="bg3-KG-iMo"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="bg3-KG-iMo">
+                            <connections>
+                                <action selector="saveUpdatedTask:" destination="4KP-8o-yap" id="dKq-4n-pmv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="AZr-H8-qRq" id="7bH-TJ-8WH"/>
+                        <outlet property="txtDesc" destination="7Aj-RL-Wji" id="RUV-lv-dgn"/>
+                        <outlet property="txtTitle" destination="bWg-EL-J04" id="k8p-Bl-0IR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Eu-0J-ccH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447.5" y="338"/>
+            <point key="canvasLocation" x="1446.75" y="337.5"/>
         </scene>
         <!--Add Task View Controller-->
         <scene sceneID="ZjW-pI-4ZF">
@@ -229,7 +292,7 @@
                         <viewControllerLayoutGuide type="bottom" id="DBp-2b-QDV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AOe-Xa-3WN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rIR-cy-uzO">
